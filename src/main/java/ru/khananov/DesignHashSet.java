@@ -1,6 +1,7 @@
 package ru.khananov;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DesignHashSet {
@@ -8,21 +9,30 @@ public class DesignHashSet {
 
     }
 
-    List<Integer> ls;
+    List<Integer> hashset;
     public DesignHashSet() {
-        ls= new ArrayList<>();
+        hashset= new ArrayList<>();
     }
 
     public void add(int key) {
-        if(!ls.contains(key)) ls.add(key);
-
+        if (!contains(key))
+            hashset.add(key);
     }
 
     public void remove(int key) {
-        if(ls.contains(key)) ls.remove(Integer.valueOf(key));
+        if (contains(key)) {
+            Iterator<Integer> iterator = hashset.listIterator();
+            while (iterator.hasNext()) {
+                if (iterator.next() == key)
+                    iterator.remove();
+            }
+        }
     }
 
     public boolean contains(int key) {
-        return ls.contains(key);
+        for (Integer e : hashset)
+            if (e == key) return true;
+
+        return false;
     }
 }
