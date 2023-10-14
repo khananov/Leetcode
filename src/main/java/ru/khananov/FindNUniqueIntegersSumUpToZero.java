@@ -7,6 +7,8 @@ public class FindNUniqueIntegersSumUpToZero {
         System.out.println(Arrays.toString(new FindNUniqueIntegersSumUpToZero().sumZero(
             5
         )));
+
+        System.out.println(sorting(4));
     }
 
     public int[] sumZero(int n) {
@@ -19,5 +21,11 @@ public class FindNUniqueIntegersSumUpToZero {
         }
 
         return ints;
+    }
+
+    public static int sorting(int num) {
+        if (num == 1 || num == 2) return 1;
+
+        return sorting(num - 1) + sorting(num - 2);
     }
 }
