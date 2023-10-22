@@ -1,23 +1,25 @@
 package ru.khananov;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LongestPalindrome {
     public static void main(String[] args) {
         System.out.println(new LongestPalindrome().longestPalindrome("abccccdd"));
     }
 
     public int longestPalindrome(String s) {
-        int[] chars = new int[128];
-        int maxLength = 0;
-        s = s.toLowerCase();
-
-        for (int i = 0; i < s.length(); i++) {
-            chars[s.charAt(i)]++;
+        int oddCount = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for (char ch : s.toCharArray()) {
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+            if (map.get(ch) % 2 == 1)
+                oddCount++;
+            else
+                oddCount--;
         }
-
-        for (int i = 0; i < chars.length; i++) {
-            if (chars[i] > 1) maxLength++;
-        }
-
-        return maxLength;
+        if (oddCount > 1)
+            return s.length() - oddCount + 1;
+        return s.length();
     }
 }
