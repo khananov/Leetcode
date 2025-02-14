@@ -1,21 +1,25 @@
 package ru.khananov;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class TwoSum {
     public static void main(String[] args) {
-
+        System.out.println(Arrays.toString(new TwoSum().twoSum(new int[] {-1,-2,-3,-4,-5}, -8)));
     }
 
     public int[] twoSum(int[] nums, int target) {
-        int currentTarget = 0;
-
-        for (int firstIndex = 0; firstIndex < nums.length - 1; firstIndex++) {
-            currentTarget = target - nums[firstIndex];
-
-            for (int secondIndex = firstIndex + 1; secondIndex < nums.length; secondIndex++) {
-                if (nums[secondIndex] == currentTarget)
-                    return new int[]{firstIndex, secondIndex};
+        Map<Integer, Integer> integers = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int dif = target - nums[i];
+            Integer value = integers.get(dif);
+            if (value != null) {
+                return new int[] {value, i};
             }
+            integers.put(nums[i], i);
         }
-        return new int[] {0};
+
+        return new int[] {-1, -1};
     }
 }
